@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Knockout</title>
+    </head>
+    <body>
+        <h1 data-bind="text: monkey">Monkey</h1>
+        <input type="text" data-bind="value: monkey, valueUpdate: 'afterkeydown'" />
+        <input type="submit" data-bind="click: addAnimal" />
+
+        <ul data-bind="foreach: array">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <script src="//localhost:35729/livereload.js"></script>
+        <script src="/bower_components/knockout/dist/knockout.js"></script>
+        <script type="text/javascript">
+            var vm = {
+                monkey: ko.observable(),
+                array: ko.observableArray(),
+                addAnimal: function(){
+                	this.array(this.monkey());
+                }
+            };
+
+            vm.array.push('monkey');
+            vm.array.push('giraffe');
+            vm.array.push('animal');
+
+            vm.monkey('elephant');
+
+            ko.applyBindings(vm);
+        </script>
+    </body>
+</html>
